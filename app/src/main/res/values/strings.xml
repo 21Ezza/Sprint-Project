@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">Sprint-Project</string>
+    <string name="app_name">UILogin</string>
+    <string name="bank_sephor">BANK SEPHORA</string>
+    <string name="silahkan_ma">Silahkan masukkan username dan password terdaftar Anda untuk melakukan login</string>
+    <string name="login">Login</string>
+    <string name="button">Lupa Username / Password ?</string>
+    <string name="pt_bank_sep">PT Bank Sephora Indonesia ("Bank Sephora") telah berlisensi oleh Bank Indonsia dan diawasi oleh Otoritas Jasa Keuangan (OJK) serta merupakan peserta dari Lembaga Penjamin Simpanan (LPS).</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="informasi_akun">Informasi Akun</string>
+    <string name="masukkan_informasi_mengenai_akun_mobile_banking_sephora_anda">Masukkan informasi mengenai akun mobile banking Sephora Anda.</string>
+    <string name="aktivasi_akun">Aktivasi Akun</string>
+    <string name="title_activity_main_regis">MainRegis</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
 </resources>

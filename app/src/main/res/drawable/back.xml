@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#34c759"/>
+            <corners android:radius="100dp"/>
+            <stroke android:width="1dp"
+                android:color="#8c8c8c"/>
+            <size android:height="20dp"/>
+
+        </shape>
+    </item>
+
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white"/>
+            <corners android:radius="100dp"/>
+            <stroke android:width="1dp"
+                android:color="#8c8c8c"/>
+            <size android:height="20dp"/>
+
+        </shape>
+    </item>
+
+<!--    <vector-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:aapt="http://schemas.android.com/aapt"-->
+<!--        android:width="45dp"-->
+<!--        android:height="16dp"-->
+<!--        android:viewportWidth="45"-->
+<!--        android:viewportHeight="16"-->
+<!--        >-->
+
+<!--        <group>-->
+
+<!--            <clip-path-->
+<!--                android:pathData="M8 0H37C41.4183 0 45 3.58172 45 8C45 12.4183 41.4183 16 37 16H8C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0Z"-->
+<!--                />-->
+
+<!--            <path-->
+<!--                android:pathData="M0 0V16H45V0"-->
+<!--                android:fillColor="#DAE9FF"-->
+<!--                />-->
+
+<!--            <path-->
+<!--                android:pathData="M8 0H37C41.4183 0 45 3.58172 45 8C45 12.4183 41.4183 16 37 16H8C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0Z"-->
+<!--                android:strokeWidth="2"-->
+<!--                android:strokeColor="#98C1FF"-->
+<!--                />-->
+
+<!--        </group>-->
+
+<!--    </vector>-->
+</selector>
