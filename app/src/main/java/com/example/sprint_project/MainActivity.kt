@@ -12,6 +12,7 @@ import com.example.sprint_project.data.api.CredentialLoginApi
 import com.example.sprint_project.data.api.UserApi
 import com.example.sprint_project.data.model.UserPagination
 import com.example.sprint_project.databinding.ActivityMainBinding
+import com.example.sprint_project.features.home.HomeActivity
 import com.example.sprint_project.features.loginUI.LoginPresenter
 import com.example.sprint_project.features.loginUI.LoginView
 import com.example.sprint_project.features.register.MainRegis
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity(), LoginView {
 
     override fun onSuccessLogin(username: String, password: String) {
         presenter.register(username, password)
+        startActivity(Intent(this@MainActivity, HomeActivity::class.java))
     }
 
     override fun onErrorUser() {
