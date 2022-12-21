@@ -77,12 +77,12 @@ class HomeActivity : AppCompatActivity(), HomeContract {
         binding.progressBarUserList.isVisible = isShown
     }
 
-    private val rvClickListener: (String, String, String) -> Unit =
-        {name, email, avatar ->
+    private val rvClickListener: (User) -> Unit =
+        {item ->
             startActivity(Intent(this@HomeActivity, UserListDetail::class.java).apply {
-                putExtra("userName", name)
-                putExtra("userEmail", email)
-                putExtra("userAvatar", avatar)
+                putExtra("userName", item.firstName)
+                putExtra("userEmail", item.email)
+                putExtra("userAvatar", item.avatar)
             })
 
         }

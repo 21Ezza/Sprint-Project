@@ -12,7 +12,7 @@ import com.example.sprint_project.databinding.UserListViewBinding
 
 class AdapterUserList(private val context: Context): RecyclerView.Adapter<AdapterUserList.ViewHolder>() {
 
-    private var itemListener: ((String, String, String) -> Unit)? = null
+    private var itemListener: ((User) -> Unit)? = null
     private  val data: MutableList<User> = mutableListOf()
     override fun onCreateViewHolder (parent: ViewGroup, viewType: Int): ViewHolder{
         return ViewHolder(
@@ -21,11 +21,7 @@ class AdapterUserList(private val context: Context): RecyclerView.Adapter<Adapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
-        holder.setData(data[position])
-        holder.itemView.setOnClickListener{
-            val intent = Intent (it.context, UserListDetail::class.java)
-            it.context.startActivity(intent)
-        }
+        holder.setData(data[position], itemListener)
     }
 
     override fun getItemCount(): Int = data.size
@@ -39,18 +35,22 @@ class AdapterUserList(private val context: Context): RecyclerView.Adapter<Adapte
     }
 
     inner class ViewHolder(private val binding: UserListViewBinding): RecyclerView.ViewHolder(binding.root) {
-        fun setData(item: User){
+        fun setData(item: User, listener: ((User) -> Unit)?){
             with(binding) {
                 tvUserName.text = "${item.firstName} ${item.lastName}"
                 Glide
                     .with(root.context)
                     .load(item.avatar)
                     .into(ivUserList)
+
+                root.setOnClickListener {
+                    listener?.invoke(item)
+                }
             }
         }
     }
 
-    fun setOnItemClicker(listener: ((String, String, String) -> Unit)?){
+    fun setOnItemClicker(listener: ((User) -> Unit)?){
         this.itemListener = listener
     }
 
