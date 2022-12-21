@@ -100,7 +100,6 @@ class MainActivity : AppCompatActivity(), LoginView {
 
     override fun onSuccessLogin(username: String, password: String) {
         presenter.register(username, password)
-        startActivity(Intent(this@MainActivity, HomeActivity::class.java))
     }
 
     override fun onErrorUser() {
@@ -122,7 +121,7 @@ class MainActivity : AppCompatActivity(), LoginView {
 
     override fun onSuccessRegister() {
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
-//        startActivity(Intent(this,Home::class.java))
+        startActivity(Intent(this@MainActivity, HomeActivity::class.java))
     }
 
     override fun onDestroy() {
