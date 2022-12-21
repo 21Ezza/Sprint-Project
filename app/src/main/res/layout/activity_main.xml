@@ -134,6 +134,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_input1"
+                    android:inputType="textEmailAddress"
+                    android:imeOptions="actionNext"
                     android:hint="@string/username" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -162,6 +164,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/text_input1"
                     android:inputType="textPassword"
+                    android:imeOptions="actionNext"
                     android:hint="@string/password" />
 
 

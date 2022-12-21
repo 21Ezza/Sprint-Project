@@ -26,7 +26,7 @@
             app:layout_constraintGuide_begin="20dp" />
 
         <ImageButton
-            android:id="@+id/ib_button"
+            android:id="@+id/ib_back"
             android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
