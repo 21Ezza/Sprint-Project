@@ -1,11 +1,13 @@
 package com.example.sprint_project.data.model
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.example.sprint_project.UserListDetail
 import com.example.sprint_project.databinding.UserListViewBinding
 
 class AdapterUserList(private val context: Context): RecyclerView.Adapter<AdapterUserList.ViewHolder>() {
@@ -20,6 +22,10 @@ class AdapterUserList(private val context: Context): RecyclerView.Adapter<Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
         holder.setData(data[position])
+        holder.itemView.setOnClickListener{
+            val intent = Intent (it.context, UserListDetail::class.java)
+            it.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = data.size
@@ -33,7 +39,7 @@ class AdapterUserList(private val context: Context): RecyclerView.Adapter<Adapte
     }
 
     inner class ViewHolder(private val binding: UserListViewBinding): RecyclerView.ViewHolder(binding.root) {
-        fun setData(item: User) {
+        fun setData(item: User){
             with(binding) {
                 tvUserName.text = "${item.firstName} ${item.lastName}"
                 Glide
