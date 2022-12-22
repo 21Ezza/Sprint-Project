@@ -1,24 +1,17 @@
 package com.example.sprint_project.features.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.isVisible
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sprint_project.R
-import com.example.sprint_project.data.api.ListResourceApi
 import com.example.sprint_project.data.model.AdapterItem
 import com.example.sprint_project.data.model.ItemModel
-import com.example.sprint_project.data.model.ListPageResource
-import com.example.sprint_project.data.model.ListResource
 import com.example.sprint_project.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(), HomeContract {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var adapterNotif: AdapterItem
-    private lateinit var presenter: HomePresenter
-    private val adapter: ListResourceAdapter by lazy { ListResourceAdapter() }
-
 
     private val listTransactionTitle = listOf(
         ItemModel("Keluar", "Top Up E-Wallet", "Gopay - 08123123123", "Rp. 150.000"),
@@ -30,18 +23,10 @@ class HomeActivity : AppCompatActivity(), HomeContract {
         ItemModel("Masuk", "Top Up Steam", "OVO - 087590212903", "Rp. 659.000"),
     )
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.rvListResource.apply {
-            adapter = this@HomeActivity.adapter
-            layoutManager = LinearLayoutManager(this@HomeActivity)
-        }
-
 
         binding.userProfile.setUpperText("Abdullah Ibn Hassan")
         binding.userProfile.setLowerText("666 Poin")
@@ -55,29 +40,5 @@ class HomeActivity : AppCompatActivity(), HomeContract {
         binding.rvTransaction.adapter = adapterNotif
         binding.rvTransaction.layoutManager = layoutManager
 
-        val layoutListManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvListResource.adapter = this@HomeActivity.adapter
-        binding.rvListResource.layoutManager =  layoutListManager
-
-        presenter = HomePresenter(this, ListResourceApi()).apply {
-            onAttach(this@HomeActivity)
-        }
-
-    }
-
-    override fun onLoading() {
-        binding.progressIndicator.isVisible = true
-    }
-
-    override fun onFinishedLoading() {
-        binding.progressIndicator.isVisible = false
-    }
-
-    override fun onErrorListResource(message: String) {
-
-    }
-
-    override fun onSuccessListResource(list: List<ListResource> ) {
-        adapter.submitList(list)
     }
 }
