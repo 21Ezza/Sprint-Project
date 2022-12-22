@@ -15,6 +15,13 @@
         android:theme="@style/Theme.sprint_project"
         tools:targetApi="31">
         <activity
+            android:name=".UserListDetail"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".features.home.HomeActivity"
             android:exported="false">
             <meta-data

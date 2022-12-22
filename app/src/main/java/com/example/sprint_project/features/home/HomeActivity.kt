@@ -3,15 +3,22 @@ package com.example.sprint_project.features.home
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sprint_project.R
+import com.example.sprint_project.UserListDetail
+import com.example.sprint_project.data.api.UserApi
 import com.example.sprint_project.data.model.AdapterItem
+import com.example.sprint_project.data.model.AdapterUserList
 import com.example.sprint_project.data.model.ItemModel
+import com.example.sprint_project.data.model.User
 import com.example.sprint_project.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(), HomeContract {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var adapterNotif: AdapterItem
+    private lateinit var presenter: HomePresenter
+    private val adapter: AdapterUserList by lazy { AdapterUserList(this@HomeActivity) }
 
     private val listTransactionTitle = listOf(
         ItemModel("Keluar", "Top Up E-Wallet", "Gopay - 08123123123", "Rp. 150.000"),
@@ -36,9 +43,47 @@ class HomeActivity : AppCompatActivity(), HomeContract {
 
         adapterNotif = AdapterItem(listTransactionTitle.toMutableList())
 
+        val layoutManagerHorizontal = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val layoutManager = LinearLayoutManager(this)
         binding.rvTransaction.adapter = adapterNotif
         binding.rvTransaction.layoutManager = layoutManager
+        binding.rvUserList.adapter = this@HomeActivity.adapter
+        binding.rvUserList.layoutManager = layoutManagerHorizontal
+
+        presenter = HomePresenter(this, UserApi()).apply {
+            onAttach(this@HomeActivity)
+        }
 
     }
+
+    override fun onLoading() {
+        showProgress(true)
+    }
+
+    override fun onFinishedLoading() {
+        showProgress(false)
+    }
+
+    override fun onErrorUserList(message: String) {
+
+    }
+
+    override fun onSuccesGetUserList(users: List<User>) {
+        adapter.submitList(users)
+        adapter.setOnItemClicker(rvClickListener)
+    }
+
+    private fun showProgress(isShown: Boolean) {
+        binding.progressBarUserList.isVisible = isShown
+    }
+
+    private val rvClickListener: (User) -> Unit =
+        {item ->
+            startActivity(Intent(this@HomeActivity, UserListDetail::class.java).apply {
+                putExtra("userName", item.firstName)
+                putExtra("userEmail", item.email)
+                putExtra("userAvatar", item.avatar)
+            })
+
+        }
 }
