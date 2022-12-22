@@ -7,11 +7,9 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sprint_project.R
 import com.example.sprint_project.UserListDetail
+import com.example.sprint_project.data.api.ListResourceApi
 import com.example.sprint_project.data.api.UserApi
-import com.example.sprint_project.data.model.AdapterItem
-import com.example.sprint_project.data.model.AdapterUserList
-import com.example.sprint_project.data.model.ItemModel
-import com.example.sprint_project.data.model.User
+import com.example.sprint_project.data.model.*
 import com.example.sprint_project.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(), HomeContract {
@@ -19,6 +17,7 @@ class HomeActivity : AppCompatActivity(), HomeContract {
     private lateinit var adapterNotif: AdapterItem
     private lateinit var presenter: HomePresenter
     private val adapter: AdapterUserList by lazy { AdapterUserList(this@HomeActivity) }
+    private val listAdapter: ListResourceAdapter by lazy { ListResourceAdapter() }
 
     private val listTransactionTitle = listOf(
         ItemModel("Keluar", "Top Up E-Wallet", "Gopay - 08123123123", "Rp. 150.000"),
@@ -50,7 +49,11 @@ class HomeActivity : AppCompatActivity(), HomeContract {
         binding.rvUserList.adapter = this@HomeActivity.adapter
         binding.rvUserList.layoutManager = layoutManagerHorizontal
 
-        presenter = HomePresenter(this, UserApi()).apply {
+        val layoutListManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvListResource.adapter = this@HomeActivity.listAdapter
+        binding.rvListResource.layoutManager =  layoutListManager
+
+        presenter = HomePresenter(this, UserApi(), ListResourceApi()).apply {
             onAttach(this@HomeActivity)
         }
 
@@ -67,6 +70,10 @@ class HomeActivity : AppCompatActivity(), HomeContract {
     override fun onErrorUserList(message: String) {
 
     }
+    override fun onErrorListResource(message: String) {
+
+    }
+
 
     override fun onSuccesGetUserList(users: List<User>) {
         adapter.submitList(users)
@@ -85,5 +92,9 @@ class HomeActivity : AppCompatActivity(), HomeContract {
                 putExtra("userAvatar", item.avatar)
             })
 
-        }
+    }
+
+    override fun onSuccessListResource(list: List<ListResource> ) {
+        listAdapter.submitList(list)
+    }
 }

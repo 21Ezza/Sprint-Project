@@ -48,6 +48,9 @@ class MainRegis : AppCompatActivity(), RegisView {
                 binding.tvKonfirmasi.editText?.text.toString()
             )
         }
+        binding.ibBack.setOnClickListener {
+            startActivity(Intent(this@MainRegis,MainActivity::class.java))
+        }
     }
 
     override fun onLoading() {
