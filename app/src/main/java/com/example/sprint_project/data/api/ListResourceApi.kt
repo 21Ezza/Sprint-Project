@@ -78,7 +78,7 @@ class ListResourceApi {
 
                 override fun onResponse(call: Call, response: Response) {
                     if (response.isSuccessful) {
-                        val userPagination = deserializeJson<UserPagination>(response.body?.string() ?: "") ?: UserPagination()
+                        val userPagination = deserializeJson<ListPageResource>(response.body?.string() ?: "") ?: ListPageResource()
                         onResponse.invoke(
                             ResponseStatus.Success(
                                 data = userPagination.data,
